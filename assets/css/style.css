@@ -1,13 +1,36 @@
 body {
 	background-image: url("../images/background-dark.png");
+	width: 100%;
+	height: 100%;
 }
 div {
 	color: white;
 	font-size: 30px;
-	clear: both;
 }
+/*#chooseText {
+	margin-top: 30px;
+}
+#optionsSelector {
+	margin-top: 80px;
+}*/
 .cartman, .tweek, .nathan, .kenny {
 	width: 175px;
 	height: 175px;
 	float: left;
+}
+/*.section {
+	margin-top: 50px
+}*/
+.cartmanName, .nathanName, .tweekName, .kennyName {
+	text-align: center;
+}
+.cartmanHealth, .nathanHealth, .tweekHealth, .kennyHealth {
+	color: black;
+	background-color: white;
+	text-align: center;
+}
+.tile {
+	position: relative;
+	display: inline-block;
+	float: initial;
 }
