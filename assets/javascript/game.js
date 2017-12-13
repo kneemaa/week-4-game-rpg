@@ -3,49 +3,53 @@ $(document).ready( function() {
  //Attack value and CounterAttack Value
 var isGameStarted = 0;
 var characters = {
-	"cartman": {
-		"userPicked": 0,
-		"hp": 10,
-		"attack": 15,
-		"counterAttack": 25},
-	"kenny": {
-		"userPicked": 0,
-		"hp": 10,
-		"attack": 15,
-		"counterAttack": 25},
-	"nathan":{
-		"userPicked": 0,
-		"hp": 10,
-		"attack": 15,
-		"counterAttack": 25},
-	"tweek": {
-		"userPicked": 0,
-		"hp": 10,
-		"attack": 15,
-		"counterAttack": 25}
+	cartman: {
+		name: "cartman",
+		userPicked: 0,
+		hp: 75,
+		attack: 15,
+		counterAttack: 25},
+	kenny: {
+		name: "kenny",
+		userPicked: 0,
+		hp: 40,
+		attack: 15,
+		counterAttack: 25},
+	nathan:{
+		name: "nathan",
+		userPicked: 0,
+		hp: 95,
+		attack: 15,
+		counterAttack: 25},
+	tweek: {
+		name: "tweek",
+		userPicked: 0,
+		hp: 105,
+		attack: 15,
+		counterAttack: 25}
 	};
 
-var cartmanRender = "<div class='cartman character tile'>\
+var cartmanRender = "<div class='cartman cartmanCard tile'>\
 						<div class='cartmanName'>Cartman</div>\
 						<img class='cartman' src='./assets/images/cartman.png' alt='cartman'>\
-						<div class='cartmanHealth'>" + characters.cartman["hp"] + "</div>\
+						<div class='cartmanHealth'>" + characters.cartman.hp + "</div>\
 					</div>\\";
-var nathanRender = "<div class='nathan character tile'>\
+var nathanRender = "<div class='nathan nathanCard tile'>\
 						<div class='nathanName'>Nathan</div>\
 						<img class='nathan' src='./assets/images/nathan.png' alt='nathan'>\
-						<div class='nathanHealth'>" + characters.nathan["hp"] + "</div>\
+						<div class='nathanHealth'>" + characters.nathan.hp + "</div>\
 					</div>\\";
 
-var tweekRender = "<div class='tweek character tile'>\
+var tweekRender = "<div class='tweek tweekCard tile'>\
 						<div class='tweekName'>Tweek</div>\
 						<img class='tweek' src='./assets/images/tweek.png' alt='tweek'>\
-						<div class='tweekHealth'>" + characters.tweek["hp"] + "</div>\
+						<div class='tweekHealth'>" + characters.tweek.hp + "</div>\
 					</div>\\";
 
-var kennyRender = "<div class='kenny character tile'>\
+var kennyRender = "<div class='kenny kennyCard tile'>\
 						<div class='kennyName'>kenny</div>\
 						<img class='kenny' src='./assets/images/kenny.png' alt='kenny'>\
-						<div class='kennyHealth'>" + characters.kenny["hp"] + "</div>\
+						<div class='kennyHealth'>" + characters.kenny.hp + "</div>\
 					</div>\\";
 
  //Render 
@@ -57,40 +61,54 @@ var nathanPicked = characters.nathan.userPicked;
 var tweekPicked = characters.tweek.userPicked;
 var kennyPicked = characters.kenny.userPicked;
 
-
-//play game in here
-function playerSelect() {
-	if (cartmanPicked === 1 || nathanPicked === 1 || tweekPicked === 1 || kennyPicked === 1){
-	}
-};
-
-//select character here
-
-
-function checkSelectBit(edit) {
-	if (cartmanPicked === 0 && nathanPicked === 0 && tweekPicked === 0 && kennyPicked === 0){
-		characters.cartman["userPicked"] = 1;
-		console.log(cartmanPicked);
-	} else {}
+function pickedCheck (){
+	cartmanPicked = characters.cartman.userPicked;
+	nathanPicked = characters.nathan.userPicked;
+	tweekPicked = characters.tweek.userPicked;
+	kennyPicked = characters.kenny.userPicked;
 }
 
+//select character & play game in here
+function playerSelect(edit) {
+	if (cartmanPicked === 0 && nathanPicked === 0 && tweekPicked === 0 && kennyPicked === 0){
+		
+		return characters[edit].userPicked = 1;
+	
+	} else if (cartmanPicked === 1 || nathanPicked === 1 || tweekPicked === 1 || kennyPicked === 1){
+		console.log("the game is afoot");
+		for (var key in characters){
+			if (characters[key].userPicked === 0){
+				$("."+key+"Health").addClass("enemy");
+			} else{}
+		}
+
+	} else {}
+
+};
+
+//select character > Deprecated
+/*function checkSelectBit(edit) {
+	if (cartmanPicked === 0 && nathanPicked === 0 && tweekPicked === 0 && kennyPicked === 0){
+		return characters[edit].userPicked = 1;
+	} else {}
+}*/
+
 //User picks their player
-$(".cartman").click( function() {
-	checkSelectBit("cartman");
-	console.log(cartmanPicked);
-	playerSelect();
+$(".cartmanCard").click( function() {
+	playerSelect("cartman");
+	pickedCheck();
 });
-$(".nathan").click( function() {
-	nathanPicked = 1;
-	playerSelect();
+$(".nathanCard").click( function() {
+	playerSelect("nathan");
+	pickedCheck();
 	});
-$(".tweek").click( function() {
-	tweekPicked = 1;
-	playerSelect();
+$(".tweekCard").click( function() {
+	playerSelect("tweek");
+	pickedCheck();
 });
-$(".kenny").click( function() {
-	kennyPicked = 1;
-	playerSelect();
+$(".kennyCard").click( function() {
+	playerSelect("kenny");
+	pickedCheck();
 });
 
 
