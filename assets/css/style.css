@@ -17,6 +17,7 @@ div {
 	width: 175px;
 	height: 175px;
 	float: left;
+	margin-right: 20px;
 }
 /*.section {
 	margin-top: 50px
@@ -34,6 +35,18 @@ div {
 	display: inline-block;
 	float: initial;
 }
+.playerOptions {
+	margin-top: 50px;
+}
+.enemyOptions {
+	padding-top: 100px;
+}
 .enemy {
 	background-color: red;
+}
+.attacker {
+	background-color: grey;
+}
+.defender {
+	background-color: mediumpurple;
 }
