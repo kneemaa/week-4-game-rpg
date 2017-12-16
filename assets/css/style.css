@@ -7,46 +7,47 @@ div {
 	color: white;
 	font-size: 30px;
 }
-/*#chooseText {
-	margin-top: 30px;
-}
-#optionsSelector {
-	margin-top: 80px;
-}*/
 .cartman, .tweek, .nathan, .kenny {
 	width: 175px;
 	height: 175px;
-	float: left;
+	/*float: left;*/
 	margin-right: 20px;
 }
-/*.section {
-	margin-top: 50px
-}*/
 .cartmanName, .nathanName, .tweekName, .kennyName {
 	text-align: center;
-}
-.cartmanHealth, .nathanHealth, .tweekHealth, .kennyHealth {
 	color: black;
-	background-color: white;
+}
+.kennyHealth, .tweekHealth, .cartmanHealth, .nathanHealth {
+	color: black;
 	text-align: center;
 }
 .tile {
 	position: relative;
 	display: inline-block;
 	float: initial;
+	background-color: white;
+	height: 260px;
 }
 .playerOptions {
 	margin-top: 50px;
 }
-.enemyOptions {
-	padding-top: 100px;
+.enemiesToAttack {
+	padding-top: 25px;
+	clear: both;
 }
 .enemy {
 	background-color: red;
+	left: -225px;
 }
 .attacker {
 	background-color: grey;
 }
 .defender {
 	background-color: mediumpurple;
+}
+.defendingEnemy {
+	padding-top: 25px;
+}
+.attackButtonStyle {
+	top: 100px;
 }

@@ -16,18 +16,41 @@
 	
 	<div class="container">
 		<div class="row">
-			<div id="chooseText" class="col-md-12 section"></div>
+			<div class="col-md-10 section">
+				<div class="row playerOptions">Pick A Player</div>
+				<div class="nathan tile" name="nathan" attack="10">
+					<div class="nathanName">Nathan</div>
+					<img class="nathan" src="./assets/images/nathan.png" alt="nathan">
+					<div class="nathanHealth health" hp="300"></div>
+				</div>
+				<div class="cartman tile" name="cartman" attack="20">
+					<div class="cartmanName">Cartman</div>
+					<img class="cartman" src="./assets/images/cartman.png" alt="cartman">
+					<div class="cartmanHealth health" hp="200"></div>
+				</div>
+				<div class="tweek tile" name="tweek" attack="15">
+					<div class="tweekName">Tweek</div>
+					<img class="tweek" src="./assets/images/tweek.png" alt="tweek">
+					<div class="tweekHealth health" hp="150"></div>
+				</div>
+				<div class="kenny tile" name="kenny" attack="10">
+					<div class="kennyName">Kenny</div>
+					<img class="kenny" src="./assets/images/kenny.png" alt="kenny">
+					<div class="kennyHealth health" hp="250"></div>
+				</div>
+			</div>
+			<div class="col-md-2 section attackButtonStyle">
+				<button type="button" class="btn btn-default attackButton">Attack!</button>
+			</div>
 		</div>
-		<div class="row playerOptions"></div>
-		<div id="optionsSelector"  class="row">
+		<div class="row enemiesToAttack">
 			<div class="col-md-3 section playerCharacter"></div>
 		</div>
-		<div class="row">
-			<div class="col-md-3 section enemiesToAttack"></div>
+		<div class="row defendingEnemy">
+			<div class="col-md-3 section"></div>
 		</div>
-		<div class="row">
-			<div class="col-md-3 section defendingEnemy"></div>
-		</div>
+		<div class="winPrompt" style="display: none;">You Won! Click "Restart" to play again.  <button type="button" class="btn btn-default restartButton">Restart!</button></div>
+		<div class="lossPrompt" style="display: none;">You Lost! Click "Restart" to play again.  <button type="button" class="btn btn-default restartButton">Restart!</button></div>
 	
 	
 	</div>
