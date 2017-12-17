@@ -3,33 +3,21 @@ $(document).ready( function() {
 	var userSelectedOpponent = false;
 	var characters = {
 	cartman: {
-			name: "cartman",
 			attack: 10,
 			health: 200,
-			counterAttack: 45,
-			isDefending: false,
-			isAlive: true},
+			counterAttack: 45},
 	kenny: {
-			name: "kenny",
 			attack: 10,
 			health: 250,
-			counterAttack: 40,
-			isDefending: false,
-			isAlive: true},
+			counterAttack: 40},
 	nathan: {
-		 	name: "nathan",
 			attack: 15,
 			health: 225,
-			counterAttack: 30,
-			isDefending: false,
-			isAlive: true},
+			counterAttack: 30},
 	tweek: {
-			name: "tweek",
 			attack: 25,
 			health: 150,
-			counterAttack: 45,
-			isDefending: false,
-			isAlive: true}
+			counterAttack: 45}
 		};
 	var computerCharactersLeft = 3;
 	var usersChoice = "";
