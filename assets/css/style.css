@@ -24,12 +24,12 @@ div {
 .tile {
 	position: relative;
 	display: inline-block;
-	float: initial;
 	background-color: white;
 	height: 260px;
 }
 .playerOptions {
 	margin-top: 50px;
+	margin-bottom: 10px;
 }
 .enemiesToAttack {
 	padding-top: 25px;
@@ -37,7 +37,7 @@ div {
 }
 .enemy {
 	background-color: red;
-	left: -225px;
+	left: -275px;
 }
 .attacker {
 	background-color: grey;
@@ -50,4 +50,20 @@ div {
 }
 .attackButtonStyle {
 	top: 100px;
+}
+.displayBox {
+	background-color: white;
+	height: 100px;
+	width: 300px;
+	margin-top: 10px;
+	text-align: center;
+	opacity: .3;
+}
+
+.userCurrentAttack, .computerCounterAttack {
+	opacity: 1;
+	color: black;
+	padding-top: 10px;
+	font-weight: 10px;
+	font-size: 20px;
 }
