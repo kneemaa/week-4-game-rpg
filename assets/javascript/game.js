@@ -1,137 +1,115 @@
 $(document).ready( function() { 
- //Set character values
- //Attack value and CounterAttack Value
-var isGameStarted = 0;
-var characters = {
+	var userHasSelectedCharacter = false;
+	var userSelectedOpponent = false;
+	var characters = {
 	cartman: {
-		name: "cartman",
-		userPicked: 0,
-		hp: 75,
-		attack: 15,
-		counterAttack: 25},
+			attack: 10,
+			health: 200,
+			counterAttack: 45},
 	kenny: {
-		name: "kenny",
-		userPicked: 0,
-		hp: 40,
-		attack: 15,
-		counterAttack: 25},
-	nathan:{
-		name: "nathan",
-		userPicked: 0,
-		hp: 95,
-		attack: 15,
-		counterAttack: 25},
+			attack: 10,
+			health: 250,
+			counterAttack: 40},
+	nathan: {
+			attack: 15,
+			health: 225,
+			counterAttack: 30},
 	tweek: {
-		name: "tweek",
-		userPicked: 0,
-		hp: 105,
-		attack: 15,
-		counterAttack: 25}
-	};
+			attack: 25,
+			health: 150,
+			counterAttack: 45}
+		};
+	var computerCharactersLeft = 3;
+	var usersChoice = "";
+	var defendingCharacter = "";
+	var baseUserAttack;
+	var userHealth;
+	var userAttack;
+	var computerHealth;
+	var computerAttack;
+	var firstAttack = false;
 
-var cartmanRender = "<div class='cartman cartmanCard tile'>\
-						<div class='cartmanName'>Cartman</div>\
-						<img class='cartman' src='./assets/images/cartman.png' alt='cartman'>\
-						<div class='cartmanHealth'>" + characters.cartman.hp + "</div>\
-					</div>\\";
-var nathanRender = "<div class='nathan nathanCard tile'>\
-						<div class='nathanName'>Nathan</div>\
-						<img class='nathan' src='./assets/images/nathan.png' alt='nathan'>\
-						<div class='nathanHealth'>" + characters.nathan.hp + "</div>\
-					</div>\\";
+	$(".health").each(function() {
+		$(this).html($(this).attr("hp"));
+	})
 
-var tweekRender = "<div class='tweek tweekCard tile'>\
-						<div class='tweekName'>Tweek</div>\
-						<img class='tweek' src='./assets/images/tweek.png' alt='tweek'>\
-						<div class='tweekHealth'>" + characters.tweek.hp + "</div>\
-					</div>\\";
-
-var kennyRender = "<div class='kenny kennyCard tile'>\
-						<div class='kennyName'>kenny</div>\
-						<img class='kenny' src='./assets/images/kenny.png' alt='kenny'>\
-						<div class='kennyHealth'>" + characters.kenny.hp + "</div>\
-					</div>\\";
-
- //Render 
-$("div.playerOptions").replaceWith(cartmanRender + nathanRender + tweekRender + kennyRender);
-
-
-var cartmanPicked = characters.cartman.userPicked;
-var nathanPicked = characters.nathan.userPicked;
-var tweekPicked = characters.tweek.userPicked;
-var kennyPicked = characters.kenny.userPicked;
-
-function pickedCheck (){
-	cartmanPicked = characters.cartman.userPicked;
-	nathanPicked = characters.nathan.userPicked;
-	tweekPicked = characters.tweek.userPicked;
-	kennyPicked = characters.kenny.userPicked;
-}
-
-//select character & play game in here
-function playerSelect(edit) {
-	if (cartmanPicked === 0 && nathanPicked === 0 && tweekPicked === 0 && kennyPicked === 0){
-		
-		return characters[edit].userPicked = 1;
-	
-	} else if (cartmanPicked === 1 || nathanPicked === 1 || tweekPicked === 1 || kennyPicked === 1){
-		console.log("the game is afoot");
-		for (var key in characters){
-			if (characters[key].userPicked === 0){
-				$("."+key+"Health").addClass("enemy");
-			} else{}
+	$(".tile").click( function() {
+		if (!userHasSelectedCharacter) {
+			$(this).addClass("attacker");
+			usersChoiceObject = characters[$(this).attr("name")];
+			usersChoice = $(this).attr("name");
+			userHasSelectedCharacter = true;
+			userHealth = parseInt(usersChoiceObject.health);
+			userAttack = parseInt(usersChoiceObject.attack);
+			baseUserAttack = userAttack;
+			$(".userCurrentAttack").html(usersChoice + "'s current attack: " + userAttack);
+			$(".playerOptions").html("Choose an opponent");
+			$(".tile").each(function() {
+				if (!$(this).hasClass("attacker")) {
+					$(this).addClass("enemy");
+					$(this).appendTo(".enemiesToAttack");
+				}
+			})
 		}
-
-	} else {}
-
-};
-
-//select character > Deprecated
-/*function checkSelectBit(edit) {
-	if (cartmanPicked === 0 && nathanPicked === 0 && tweekPicked === 0 && kennyPicked === 0){
-		return characters[edit].userPicked = 1;
-	} else {}
-}*/
-
-//User picks their player
-$(".cartmanCard").click( function() {
-	playerSelect("cartman");
-	pickedCheck();
-});
-$(".nathanCard").click( function() {
-	playerSelect("nathan");
-	pickedCheck();
+		if (userHasSelectedCharacter && !userSelectedOpponent) {
+			if (!$(this).hasClass("attacker")) {
+				$(this).addClass("defender");
+				defendingCharacter = $(this).attr("name")
+				defendingCharacterObject = characters[$(this).attr("name")];
+				userSelectedOpponent = true;
+				computerAttack = parseInt(defendingCharacterObject.attack);
+				computerHealth = parseInt(defendingCharacterObject.health);
+				$(".computerCounterAttack").html(defendingCharacter + "'s counter attack: " + computerAttack);
+				$(this).appendTo(".defendingEnemy");
+				$(".playerOptions").html("Attack " + defendingCharacter + "!");
+			}
+		}
 	});
-$(".tweekCard").click( function() {
-	playerSelect("tweek");
-	pickedCheck();
+	$(".restartButton").click(function restartButton(){
+		location.reload();
+	});
+
+	$(".attackButton").click(function attackButton() {
+		
+		if (usersChoice !== "" && defendingCharacter !== "") {
+			if (userHealth >= 1 && computerHealth >=1){
+				computerHealth = computerHealth - userAttack;
+				userHealth = userHealth - computerAttack;
+				if (firstAttack) {
+					firstAttack = false;
+					userAttack = baseUserAttack;
+				} else {
+					userAttack += baseUserAttack;	
+				}		
+				$("."+usersChoice+"Health").html(userHealth);
+				$("."+defendingCharacter+"Health").html(computerHealth);
+
+				if (userHealth >= 1 && computerHealth <=0 && computerCharactersLeft > 0) {
+					userSelectedOpponent = false;
+					computerCharactersLeft = computerCharactersLeft - 1;
+					$(defendingCharacter).detach();
+					$("."+defendingCharacter).css({ 'display': "none" });
+					$(".playerOptions").html(defendingCharacter + " was defeated. Choose another opponent.");
+					$("."+usersChoice+"Health").html(userHealth);
+
+					if (computerCharactersLeft === 0) {
+						$(".attackButton").css({ 'display': "none"});
+						$(".tile").css({ 'display': "none"});
+						$(".playerOptions").css({ 'display': "none"});
+						$(".winPrompt").css({ 'display': "block"});
+					}
+				
+				} else if (userHealth <= 0 || computerHealth <=0) {
+					$(".attackButton").css({ 'display': "none"});
+					$(".tile").css({ 'display': "none"});
+					$(".playerOptions").css({ 'display': "none"});
+					$(".lossPrompt").css({ 'display': "block"});
+				} 
+				$(".userCurrentAttack").html(usersChoice + "'s current attack: " + userAttack);
+				$(".computerCounterAttack").html(defendingCharacter + "'s counter attack: " + computerAttack);	
+			}
+		}
+	});
 });
-$(".kennyCard").click( function() {
-	playerSelect("kenny");
-	pickedCheck();
-});
-
-
- // - Non selected players go to defender section
-
- //enemies available to attack gets populated
-
- //Select enemy and move to Defend area
-
- //Attack button
- //attack damage doubles each click
- //counter attacks stay the same
-
-
- //Loss Logic
-
- //Win Logic
-
- //complete win logic
-
-
-
-});
-
 
 
